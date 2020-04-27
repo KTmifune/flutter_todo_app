@@ -4,8 +4,13 @@ class TasksTile extends StatelessWidget {
   final bool isChecked;
   final String taskTitle;
   final Function taskCheckCallback;
+  final Function onLongPress;
 
-  TasksTile({this.isChecked = false, this.taskTitle, this.taskCheckCallback});
+  TasksTile(
+      {this.isChecked = false,
+      this.taskTitle,
+      this.taskCheckCallback,
+      this.onLongPress});
 //  void checkBoxCallback(bool checkBoxState) {
 //    setState(() {
 //      isChecked = checkBoxState;
@@ -15,10 +20,13 @@ class TasksTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Text(
-        taskTitle,
-        style: TextStyle(
-            decoration: isChecked ? TextDecoration.lineThrough : null),
+      title: GestureDetector(
+        onLongPress: onLongPress,
+        child: Text(
+          taskTitle,
+          style: TextStyle(
+              decoration: isChecked ? TextDecoration.lineThrough : null),
+        ),
       ),
       trailing: Checkbox(
         activeColor: Colors.lightBlue,
